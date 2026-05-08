@@ -1,3 +1,4 @@
+
 # April 29th, 2:25 pm
 
 First work session for the project. I decided to set up my enviornment and all the files that i might need. I think my goal
@@ -34,3 +35,7 @@ I think for this session, the hardest part was definitely trying to figure out w
 
 second code sesh! for this session my goal is to finish the assign shift
 function and then start thinking about how to assign workstations to the employees based on all the facts provided in the input prolog file. i think i will do this by using a recursive function for the workstations. i would probably go through the list and then update the list by eliminating the worker that has been assigned. but i would also have to keep track of the assigned employees so that way i can delete them from the list after every workstation assignment. i'm also going to need a function to input the min and the max (so a unification function) and then i can apply that. i think this might require me to also create a subtract function to subtract the employees because i'm not sure prolog has a subtract function especially for lists. it has a subtract/3 function but i have to see how it works. ok lets go code, because i think this is a good thought process. 
+
+# May 8th, 3:02 pm
+
+ok i just finished writing up the initial draft of the assign_workstations function. i think one thing that definitely tripped me up was realizing how many parameters i probably actually needed. at first i just assumed that i only needed a few but i realized that there were things that i needed to save, and things that i needed to delete from. The easiest part of the function was definitely the validate function because all I needed to do for that one was a negation as a failure and then it made a lot of sense. i think what i'm going to do for the next session is create some test functions so i can debug the code, because i realized that i won't know if the code is working, so i might so something simple like print out the employee list. Also, I really love the element | list function. idk why, its so nice to look at and its super easy to use 😁
