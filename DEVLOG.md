@@ -23,3 +23,10 @@ so i'll do it later 😅 After reading the project description, here are some no
 # May 8th, 12:30 pm
 
 The goals for this session is to set up the plan predicate and figure out how to unify two files together for the prolog. hopefully, it doesn't take too long but lets figure it out.
+
+# May 8th, 1:07 pm
+
+to unify the plan predicate, i comnbined made plan/3 an input of plan/1. then, i converted all the employees to a list using the findall statement as given in the project description. and then finally, i created an assign shift function, which is going to assign employees for each shift timing and each time it creates a list of the remaining employees. Since all employees must be assigned (exactly once), this is checked by making sure that the RemainingNight is an empty list. 
+
+I think for this session, the hardest part was definitely trying to figure out what predicates i needed to create and how i was going to make sure I was meeting all the requirements. I had to search up a few things because I forgot about the uppercase and lowercase syntax in prolog 😭 but I think once I started working on it and going forward it made a lot more sense to me, it was relatively easy. The syntax is definitely more straight forward once you've written a few lines.
+
