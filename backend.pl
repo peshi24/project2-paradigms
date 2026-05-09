@@ -5,11 +5,17 @@
 
 %code for project 2
 
+%import library lists functions for the subtract and member functions
+:- use_module(library(lists)).
+
+%consult the testing.pl
+:- consult('testing.pl').
+
 % FAIL definitions
 
-workstation_idle(_,_) :- FAIL.
-avoid_workstation(_,_) :- FAIL.
-avoid_shift(_,_) :- FAIL.
+:- dynamic workstation_idle/2.
+:- dynamic avoid_workstation/2.
+:- dynamic avoid_shift/2.
 
 % ------------------------------------------------------------------------------------------------------------------------
 
@@ -17,7 +23,7 @@ avoid_shift(_,_) :- FAIL.
 plan(plan(Morning, Evening, Night)) :-
 
     %make a list of all the employees
-    findall(E, employee(E), employees),
+    findall(E, employee(E), Employees),
 
     %build the morning shift
     assign_shift(morning, Employees, Morning, RemainingMorning),
@@ -29,7 +35,7 @@ plan(plan(Morning, Evening, Night)) :-
     assign_shift(night, RemainingEvening, Night, RemainingNight),
 
     %every employee must be assigned once (so there should be an empty list leftover)
-    ReaminingNight = [].
+    RemainingNight = [].
 
 % ------------------------------------------------------------------------------------------------------------------------
 
@@ -88,14 +94,14 @@ assign_workstations(
 % choose workers function to select a valid employee group for the workstation
 choose_workers(W, Shift, AvailableEmployees, Min, Max, AssignedEmployees) :-
 
-    % pick the subset of the employees that need to be assigned (subset function)
-    subset(AssignedEmployees, AvailableEmployees),
+    % set the count value
+    between(Min, Max, Count),
 
     % check the size constraints to make sure its within the bounds of min and max
     length(AssignedEmployees, Count),
-    
-    Count >= Min,
-    Count =< Max,
+
+    % pick the subset of the employees that need to be assigned (subset function)
+    generate_subset(AssignedEmployees, AvailableEmployees),
 
     % validate all the employees to make sure it still works with all the constraints (the avoidances)
     validate(AssignedEmployees, W, Shift).
@@ -122,37 +128,45 @@ validate([E | Rest], W, Shift) :-
 % subset function 
 
 % base case: empty list
-subset([], []).
+generate_subset([], []).
+generate_subset([], _).
 
 % keep the element
-subset([X | Tail], [X | Rest]) :-
-    subset(Tail, Rest).
+generate_subset([X | Tail], Pool) :-
+    member(X, Pool),
+    subtract(Pool, [X], Remaining),
+    generate_subset(Tail, Remaining).
 
-% remove the element
-subset(Tail, [_ | Rest]) :-
-    subset(Tail, Rest).
+% -------------------------------------------------------------------------------------------------------------------------
 
-% ------------------------------------------------------------------------------------------------------------------------
+% testing functions
 
-% subtract function
-% remove all the elements of List2 from List1
+% test to see if employee is at a given workstation during a shift
+% morning
+works_at(plan(Morning, _, _), morning, E, W) :-
+    member(workstation(W, Employees), Morning),
+    member(E, Employees).
 
-% base case: two empty lists
-subtract([], _, []).
+% evening
+works_at(plan(_, Evening, _), evening, E, W) :-
+    member(workstation(W, Employees), Evening),
+    member(E, Employees).
 
-% Remove element from the list and return the resulting list
-subtract([H | T], Remove, Result) :-
-    member(H, Remove),
-    !,
-    subtract(T, Remove, Result).
+% night
+works_at(plan(_, _, Night), night, E, W) :-
+    member(workstation(W, Employees), Night),
+    member(E, Employees).
 
-% if the element is not in the list, keep it
-subtract([H | T], Remove, [H | Result]) :-
-    subtract(T, Remove, Result).
+% test to see if an employee appears in zero shifts
+no_work(Plan, E) :-
+    employee(E),
+    \+ works_at(Plan, morning, E, _),
+    \+ works_at(Plan, evening, E, _),
+    \+ works_at(Plan, night, E, _).
 
-% member function
-% check if the element is part of the list
-
-member(X, [X | _]).
-member(X, [_, T]) :- 
-    member(X, T).
+% test to see if an employee appears in more that one shift
+double_work(Plan, E) :-
+    employee(E),
+    works_at(Plan, Shift1, E, _),
+    works_at(Plan, Shift2, E, _),
+    Shift1 \= Shift2.

@@ -47,3 +47,11 @@ so for this session the plan is to finish up the subtract and subset functions a
 # May 8th, 8:15 pm
 
 This is a mid check-in during my third coding session. I have finished up writing the code, at least I believe so. I have created all the small functions, double checked the parameters, and the unifications. I think the hardest part about writing the subset and subtract function was trying to figure out how many base cases to consider. At the end, I considered empty list, keeping element, and throwing away the element. I think my favorite part was trying to figure out how to code the different list functions, because it was puzzling, but at the same time really intriguing. 
+
+# May 8th, 9:09 pm
+
+I hate debugging. This is horrendous. I should have also probably taken a look at the input and tested it, but I didn't, and I realized I was missing a few predicates in my code like the no_work, and works_at, which I am now realizing are just testing predicates, but still. UGHHHHHHHH. Ok, I think I need to take a lookover at my subset function and then add the missing query predicates and, hopefully, I will be golden. 
+
+# May 8th, 9:35 pm
+
+OK, well that was infuriating. The reason it wasn't working was because I had the wrong base case for generate subset, and because I had the wrong order for choose employee. At first, it was in an infinite recursion loop because I had forgot to constrain the length, and then generate_subset was not working because I had used ([], []) which only works for two empty sets but it should have been ([], _) so that you can get a subset from any remaining set 🤦‍♀️ I'm soooo done with this project. But, hey! At least I debugged that.
