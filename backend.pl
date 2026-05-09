@@ -9,7 +9,9 @@
 :- use_module(library(lists)).
 
 %consult the testing.pl
-:- consult('testing.pl').
+%:- consult('testing.pl').
+
+%trace --> for testing
 
 % FAIL definitions
 
@@ -128,14 +130,13 @@ validate([E | Rest], W, Shift) :-
 % subset function 
 
 % base case: empty list
-generate_subset([], []).
 generate_subset([], _).
 
 % keep the element
-generate_subset([X | Tail], Pool) :-
-    member(X, Pool),
-    subtract(Pool, [X], Remaining),
-    generate_subset(Tail, Remaining).
+generate_subset([X | Tail], [X | Rest]) :-
+    generate_subset(Tail, Rest).
+generate_subset(Sub, [_ | Rest]) :-
+    generate_subset(Sub, Rest).
 
 % -------------------------------------------------------------------------------------------------------------------------
 
@@ -158,6 +159,7 @@ works_at(plan(_, _, Night), night, E, W) :-
     member(E, Employees).
 
 % test to see if an employee appears in zero shifts
+% not a necessary function because RemainingNight takes care of this
 no_work(Plan, E) :-
     employee(E),
     \+ works_at(Plan, morning, E, _),

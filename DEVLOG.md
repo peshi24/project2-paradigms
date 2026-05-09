@@ -20,7 +20,6 @@ so i'll do it later 😅 After reading the project description, here are some no
     - there is also shifts that employees have to avoid
 - the file contains: employee/1, workstation/3, workstation_idle/2, avoid_workstation/2, avoid_shift/2
 
-
 # May 8th, 12:30 pm
 
 The goals for this session is to set up the plan predicate and figure out how to unify two files together for the prolog. hopefully, it doesn't take too long but lets figure it out.
@@ -55,3 +54,9 @@ I hate debugging. This is horrendous. I should have also probably taken a look a
 # May 8th, 9:35 pm
 
 OK, well that was infuriating. The reason it wasn't working was because I had the wrong base case for generate subset, and because I had the wrong order for choose employee. At first, it was in an infinite recursion loop because I had forgot to constrain the length, and then generate_subset was not working because I had used ([], []) which only works for two empty sets but it should have been ([], _) so that you can get a subset from any remaining set 🤦‍♀️ I'm soooo done with this project. But, hey! At least I debugged that.
+
+# May 8th, 10:45 pm
+
+I just went over my code for the last time and double checked everything. I changed up the generate_subset function after a little bit of research on the web, to make it more efficient. I also tested it with a few other cases, and the output seems to be working, so hopefully nothing breaks when I submit it, but so far everything lokos great, and hopefully thats the case 🤞
+
+this project was definitely really fun and frustrating to do. i really liked making a plan and going one step at a time, which is something i didn't get to do for projetc 1 because I started so late. However, for this one I started a bit earlier, and forgot to code or journal for some of the sessions in between, but it has been really great. Working through the code step by step definitely taught me a lot about the structure of prolog and its capabilities as a programming language. I think one of my favorite parts of coding this was using the negation as failure becasuse those were the easiest to set up . The one I hated the most was generate_subset and debugging because the code is so picky there. You also have to be concise with your predicates or else you are going to end up with hanging or really long execution times which is bad for the code. I also learned the important of code order, length before generation, spelling, i had mispelled remaining so many times, which meant sometimes a different varaible instance was used, and concise code. The more times I wrote generate_subset, the faster the execution got. 
