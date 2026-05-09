@@ -39,3 +39,11 @@ function and then start thinking about how to assign workstations to the employe
 # May 8th, 3:02 pm
 
 ok i just finished writing up the initial draft of the assign_workstations function. i think one thing that definitely tripped me up was realizing how many parameters i probably actually needed. at first i just assumed that i only needed a few but i realized that there were things that i needed to save, and things that i needed to delete from. The easiest part of the function was definitely the validate function because all I needed to do for that one was a negation as a failure and then it made a lot of sense. i think what i'm going to do for the next session is create some test functions so i can debug the code, because i realized that i won't know if the code is working, so i might so something simple like print out the employee list. Also, I really love the element | list function. idk why, its so nice to look at and its super easy to use 😁
+
+# May 8th, 7:57 pm
+
+so for this session the plan is to finish up the subtract and subset functions and then test out the code. i want to be able to see if all the functions unify correctly and if i can output them correctly as well. 
+
+# May 8th, 8:15 pm
+
+This is a mid check-in during my third coding session. I have finished up writing the code, at least I believe so. I have created all the small functions, double checked the parameters, and the unifications. I think the hardest part about writing the subset and subtract function was trying to figure out how many base cases to consider. At the end, I considered empty list, keeping element, and throwing away the element. I think my favorite part was trying to figure out how to code the different list functions, because it was puzzling, but at the same time really intriguing. 

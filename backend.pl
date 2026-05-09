@@ -116,3 +116,43 @@ validate([E | Rest], W, Shift) :-
 
     % loop back to check the rest
     validate(Rest, W, Shift).
+
+% ------------------------------------------------------------------------------------------------------------------------
+
+% subset function 
+
+% base case: empty list
+subset([], []).
+
+% keep the element
+subset([X | Tail], [X | Rest]) :-
+    subset(Tail, Rest).
+
+% remove the element
+subset(Tail, [_ | Rest]) :-
+    subset(Tail, Rest).
+
+% ------------------------------------------------------------------------------------------------------------------------
+
+% subtract function
+% remove all the elements of List2 from List1
+
+% base case: two empty lists
+subtract([], _, []).
+
+% Remove element from the list and return the resulting list
+subtract([H | T], Remove, Result) :-
+    member(H, Remove),
+    !,
+    subtract(T, Remove, Result).
+
+% if the element is not in the list, keep it
+subtract([H | T], Remove, [H | Result]) :-
+    subtract(T, Remove, Result).
+
+% member function
+% check if the element is part of the list
+
+member(X, [X | _]).
+member(X, [_, T]) :- 
+    member(X, T).
